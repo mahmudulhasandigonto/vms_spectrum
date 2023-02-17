@@ -1,6 +1,7 @@
 package com.spectrum.spectrum_vms.controller;
 
 
+import com.spectrum.spectrum_vms.error.DeleteRequestException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,7 @@ public interface BaseController<Entity, ID> {
         ResponseEntity<String> update(Entity entity) throws Exception;
 
         @DeleteMapping(value = "delete/{ids}")
-        ResponseEntity<?> deleteByIds(ID... ids);
+        ResponseEntity<?> deleteByIds(ID... ids) throws DeleteRequestException;
 
         @GetMapping(value = "list/{ids}")
         ResponseEntity<List<Entity>> getDataByIds(ID... ids);

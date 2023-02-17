@@ -1,27 +1,28 @@
 package com.spectrum.spectrum_vms.entity;
 
+import com.spectrum.spectrum_vms.enums.FuelType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "fuel_logs")
+@Builder
 public class FuelLog extends BaseEntity {
 
-    @Column(name = "date")
-    private Date date;
+
+    @Column(name = "refueling", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime refueling;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "fuel_type", length = 20)
-    private String fuelType;
+    private FuelType fuelType;
 
     @Column(name = "cost")
     private Double cost;
@@ -34,4 +35,17 @@ public class FuelLog extends BaseEntity {
     private Vehicle vehicle;
 
     // Getters and Setters
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        FuelLog fuelLog = (FuelLog) o;
+        return getId() != null && Objects.equals(getId(), fuelLog.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

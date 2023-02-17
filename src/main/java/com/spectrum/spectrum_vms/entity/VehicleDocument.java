@@ -1,19 +1,21 @@
 package com.spectrum.spectrum_vms.entity;
 
+import com.spectrum.spectrum_vms.enums.DocumentType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "vehicle_document")
+@Builder
 public class VehicleDocument extends BaseEntity {
 
     @ManyToOne
@@ -40,4 +42,17 @@ public class VehicleDocument extends BaseEntity {
     private String scanCopy;
 
     // getters and setters
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        VehicleDocument that = (VehicleDocument) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

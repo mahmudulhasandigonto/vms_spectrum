@@ -1,21 +1,20 @@
 package com.spectrum.spectrum_vms.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "drivers")
+@Builder
 public class Driver extends BaseEntity {
 
     @Column(name = "name")
@@ -27,9 +26,22 @@ public class Driver extends BaseEntity {
     @Column(name = "address")
     private String address;
 
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
-    private Vehicle vehicle;
 
-    // Getters and Setters
+//    @ManyToMany(mappedBy = "drivers", fetch = FetchType.LAZY)
+//    private List<VehicleRequest> vehicleRequests;
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Driver driver = (Driver) o;
+        return getId() != null && Objects.equals(getId(), driver.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

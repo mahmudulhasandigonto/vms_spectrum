@@ -1,4 +1,4 @@
-package com.spectrum.spectrum_vms.entity;
+package com.spectrum.spectrum_vms.enums;
 
 public enum RequestStatus {
     PENDING, ACCEPTED, REJECTED, CONFIRMED

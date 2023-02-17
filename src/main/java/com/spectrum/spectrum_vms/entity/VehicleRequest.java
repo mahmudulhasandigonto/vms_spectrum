@@ -1,42 +1,58 @@
 package com.spectrum.spectrum_vms.entity;
 
+import com.spectrum.spectrum_vms.enums.RequestStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "vehicle_requests")
-public class VehicleRequest extends BaseEntity {
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+public class VehicleRequest extends BaseEntity{
 
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
+    @ManyToMany
+    private List<Vehicle> vehicles;
+
+
+    @ManyToMany
+    private List<Driver> drivers;
+
 
     @Column(name = "request_date")
-    private Date requestDate;
+    private LocalDateTime requestDate;
 
-    @Column(name = "purpose")
-    private String purpose;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
     private Date endDate;
 
-    @Column(name = "status")
-    private String status;
 
-    @Column(name = "driver_name")
-    private String driverName;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "request_status")
+    private RequestStatus requestStatus;
 
-    // Getters and Setters
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        VehicleRequest that = (VehicleRequest) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

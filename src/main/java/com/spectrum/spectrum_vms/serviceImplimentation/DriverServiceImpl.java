@@ -44,4 +44,9 @@ public class DriverServiceImpl implements DriverService {
     public List<Driver> getData() {
         return driverRepository.findAll();
     }
+
+    @Override
+    public Driver findByDriverNameIgnoreCase(String driverName) {
+       return driverRepository.findByNameIgnoreCase(driverName);
+    }
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
-    // private static final Long serialVersionUID = -4196550013222459134L;
+    private static final Long serialVersionUID = -4196550013222459134L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
