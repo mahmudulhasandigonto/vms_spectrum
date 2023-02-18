@@ -1,19 +1,14 @@
 package com.spectrum.spectrum_vms.serviceImplimentation;
 
-import com.spectrum.spectrum_vms.entity.Driver;
-import com.spectrum.spectrum_vms.entity.Vehicle;
 import com.spectrum.spectrum_vms.entity.VehicleRequest;
-import com.spectrum.spectrum_vms.repository.DriverRepository;
 import com.spectrum.spectrum_vms.repository.VehicleRequestRepository;
 import com.spectrum.spectrum_vms.service.VehicleRequestService;
-import com.spectrum.spectrum_vms.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.awt.dnd.InvalidDnDOperationException;
 import java.util.Arrays;
 import java.util.List;
-
 
 @Service
 @RequiredArgsConstructor

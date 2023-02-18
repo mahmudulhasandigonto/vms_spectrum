@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,16 +25,12 @@ public class Driver extends BaseEntity {
     @Column(name = "address")
     private String address;
 
-
-//    @ManyToMany(mappedBy = "drivers", fetch = FetchType.LAZY)
-//    private List<VehicleRequest> vehicleRequests;
-
-
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o)
+            return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
+            return false;
         Driver driver = (Driver) o;
         return getId() != null && Objects.equals(getId(), driver.getId());
     }
