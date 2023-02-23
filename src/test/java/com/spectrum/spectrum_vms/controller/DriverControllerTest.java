@@ -40,7 +40,47 @@ class DriverControllerTest {
 
     @Test
     void getData() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/driver/list/7"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/driver/list"))
                 .andExpect(status().isOk());
     }
+
+
+
+    @Test
+    void getDataByIds() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/driver/list/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void updateDataByIds() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.patch("/driver/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "\t\t\t\"id\": 1,\n" +
+                                "\t\t\"name\": \"Mahmudul Hasan\",\n" +
+                                "\t\t\"contactNumber\": \"0178\",\n" +
+                                "\t\t\"address\": \"Rangpur\",\n" +
+                                "\t\t\"vehicle\": {\n" +
+                                "\t\t\t\"id\": 1,\n" +
+                                "\t\t\t\"make\": \"Toyota\",\n" +
+                                "\t\t\t\"model\": \"Toyota Avalon\",\n" +
+                                "\t\t\t\"year\": 2020,\n" +
+                                "\t\t\t\"regNumber\": \"15wksdjie\",\n" +
+                                "\t\t\t\"engineNumber\": \"a23343jdf333\",\n" +
+                                "\t\t\t\"vinNumber\": \"2dee\",\n" +
+                                "\t\t}\n" +
+                                "\t}")
+                )
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void deleteDataByIds() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/driver/delete/1"))
+                .andExpect(status().isOk());
+    }
+
+
+
 }
