@@ -16,13 +16,13 @@ import java.util.Objects;
 @Builder
 public class Driver extends BaseEntity {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "contact_number")
+    @Column(name = "contact_number", nullable = false, length = 12)
     private String contactNumber;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
     @Override

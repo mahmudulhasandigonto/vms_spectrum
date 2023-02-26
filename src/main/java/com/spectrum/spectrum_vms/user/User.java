@@ -23,9 +23,17 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
-    private String firstname;
-    private String lastname;
+
+    @Column(name = "_firstname", nullable = false, length = 120)
+    private String firstName;
+
+    @Column(name = "_lastname", nullable = false, length = 120)
+    private String lastName;
+
+    @Column(name = "_email",unique = true, nullable = false)
     private String email;
+
+    @Column(name = "_password", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)

@@ -26,16 +26,16 @@ public class VehicleDocument extends BaseEntity {
     @Column(name = "document_type")
     private DocumentType documentType;
 
-    @Column(name = "document_number")
+    @Column(name = "document_number", nullable = false)
     private String documentNumber;
 
-    @Column(name = "issuing_authority")
+    @Column(name = "issuing_authority", nullable = false)
     private String issuingAuthority;
 
-    @Column(name = "issuing_date")
+    @Column(name = "issuing_date", nullable = false)
     private LocalDate issuingDate;
 
-    @Column(name = "expiration_date")
+    @Column(name = "expiration_date", nullable = false)
     private LocalDate expirationDate;
 
     @Column(name = "scan_copy")

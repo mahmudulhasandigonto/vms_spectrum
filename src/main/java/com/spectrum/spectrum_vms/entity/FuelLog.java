@@ -24,10 +24,10 @@ public class FuelLog extends BaseEntity {
     @Column(name = "fuel_type", length = 20)
     private FuelType fuelType;
 
-    @Column(name = "cost")
+    @Column(name = "cost", nullable = false)
     private Double cost;
 
-    @Column(name = "liters")
+    @Column(name = "liters", nullable = false)
     private Double liters;
 
     @ManyToOne

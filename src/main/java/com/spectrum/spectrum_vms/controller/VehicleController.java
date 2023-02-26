@@ -37,7 +37,7 @@ public class VehicleController implements BaseController<Vehicle, Long> {
         }
     }
 
-    // single or multiple user information delete purpose
+    // single or multiple information delete purpose
     @Override
     public ResponseEntity<String> deleteByIds(@PathVariable("ids") Long... ids) throws DeleteRequestException {
         try {

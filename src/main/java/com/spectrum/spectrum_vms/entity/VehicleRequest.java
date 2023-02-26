@@ -35,7 +35,7 @@ public class VehicleRequest extends BaseEntity{
     private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDateTime endDate;
 
 
     @Enumerated(EnumType.STRING)

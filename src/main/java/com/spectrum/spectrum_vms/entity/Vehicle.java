@@ -16,16 +16,16 @@ import java.util.Objects;
 @Builder
 public class Vehicle extends BaseEntity {
 
-    @Column(name = "make")
+    @Column(name = "make", nullable = false)
     private String make;
 
-    @Column(name = "model")
+    @Column(name = "model", nullable = false)
     private String model;
 
-    @Column(name = "year")
+    @Column(name = "year", nullable = false)
     private Integer year;
 
-    @Column(name = "reg_number")
+    @Column(name = "reg_number", nullable = false)
     private String regNumber;
 
     @Column(name = "engine_number")

@@ -24,14 +24,9 @@ class FuelLogControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-//    @Test
-//    void save() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/fuellog/save")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content())
-//                .andExpect(status().isOk());
-//
-//    }
+    @Test
+    void save(){
+    }
 
 
     @Test
