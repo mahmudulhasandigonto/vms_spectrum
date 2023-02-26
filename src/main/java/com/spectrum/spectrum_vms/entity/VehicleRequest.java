@@ -2,10 +2,7 @@ package com.spectrum.spectrum_vms.entity;
 
 import com.spectrum.spectrum_vms.enums.RequestStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
@@ -17,6 +14,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@Builder
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class VehicleRequest extends BaseEntity{
 

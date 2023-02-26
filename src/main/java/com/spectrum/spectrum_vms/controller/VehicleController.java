@@ -48,7 +48,7 @@ public class VehicleController implements BaseController<Vehicle, Long> {
         }
     }
 
-    // single information get purpose
+    //single or multiple information get purpose
     @Override
     public ResponseEntity<List<Vehicle>> getDataByIds(@PathVariable("ids") Long... ids) {
         List<Vehicle> vehicleList = vehicleService.getDataByIds(ids);

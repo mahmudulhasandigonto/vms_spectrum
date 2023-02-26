@@ -36,7 +36,7 @@ public class DriverController implements BaseController<Driver, Long> {
     public ResponseEntity<String> update(@RequestBody Driver driver) throws Exception {
         try {
             driverService.update(driver);
-            return ResponseEntity.ok("SalesProduct information has been updated successfully");
+            return ResponseEntity.ok("Driver information has been updated successfully");
         } catch (Exception e) {
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
@@ -57,7 +57,7 @@ public class DriverController implements BaseController<Driver, Long> {
     }
 
 
-    //single information get purpose
+    //single or multiple information get purpose
     @Override
     public ResponseEntity<List<Driver>> getDataByIds(@PathVariable("ids") Long... ids) {
         List<Driver> driverList = driverService.getDataByIds(ids);

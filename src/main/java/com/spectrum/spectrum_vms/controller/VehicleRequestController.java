@@ -37,14 +37,14 @@ public class VehicleRequestController implements BaseController<VehicleRequest, 
     public ResponseEntity<String> update(@RequestBody VehicleRequest vehicleRequest) throws Exception {
         try {
             vehicleRequestService.update(vehicleRequest);
-            return ResponseEntity.ok("SalesProduct information has been updated successfully");
+            return ResponseEntity.ok("Vehicle Request information has been updated successfully");
         } catch (Exception e) {
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
     }
 
 
-    //single or multiple user information delete purpose
+    //single or multiple information delete purpose
     @Override
     public ResponseEntity<String> deleteByIds(@PathVariable("ids") Long... ids) throws DeleteRequestException {
         try {
@@ -57,8 +57,7 @@ public class VehicleRequestController implements BaseController<VehicleRequest, 
 
     }
 
-
-    //single information get purpose
+    //single or multiple information delete purpose
     @Override
     public ResponseEntity<List<VehicleRequest>> getDataByIds(@PathVariable("ids") Long... ids) {
         List<VehicleRequest> vehicleRequest = vehicleRequestService.getDataByIds(ids);
