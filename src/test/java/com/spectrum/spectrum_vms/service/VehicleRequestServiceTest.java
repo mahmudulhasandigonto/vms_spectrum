@@ -8,5 +8,6 @@ class VehicleRequestServiceTest {
 
     @BeforeEach
     void setUp() {
+
     }
 }

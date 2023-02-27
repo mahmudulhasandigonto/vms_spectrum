@@ -17,22 +17,24 @@ import java.util.Objects;
 public class FuelLog extends BaseEntity {
 
 
-    @Column(name = "refueling", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime refueling;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "fuel_type", length = 20)
     private FuelType fuelType;
 
+    @Column(name = "liters", nullable = false)
+    private Double liters;
+
     @Column(name = "cost", nullable = false)
     private Double cost;
 
-    @Column(name = "liters", nullable = false)
-    private Double liters;
+
 
     @ManyToOne
     @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
     private Vehicle vehicle;
+
+    @Column(name = "refueling", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime refueling;
 
     // Getters and Setters
 
