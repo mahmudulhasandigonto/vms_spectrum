@@ -1,6 +1,7 @@
 package com.spectrum.spectrum_vms.user;
 
 
+import com.spectrum.spectrum_vms.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.spectrum.spectrum_vms.auth;
 
 import com.spectrum.spectrum_vms.config.JwtService;
-import com.spectrum.spectrum_vms.user.Role;
+import com.spectrum.spectrum_vms.enums.Role;
 import com.spectrum.spectrum_vms.user.User;
 import com.spectrum.spectrum_vms.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +30,7 @@ public class AuthenticationService {
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .user(user)
                 .token(jwtToken)
                 .build();
     }
@@ -45,6 +46,7 @@ public class AuthenticationService {
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .user(user)
                 .token(jwtToken)
                 .build();
     }
