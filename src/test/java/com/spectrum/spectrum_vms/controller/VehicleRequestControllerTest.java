@@ -1,5 +1,13 @@
 package com.spectrum.spectrum_vms.controller;
 
+import com.spectrum.spectrum_vms.entity.Driver;
+import com.spectrum.spectrum_vms.entity.FuelLog;
+import com.spectrum.spectrum_vms.entity.Vehicle;
+import com.spectrum.spectrum_vms.enums.FuelType;
+import com.spectrum.spectrum_vms.repository.DriverRepository;
+import com.spectrum.spectrum_vms.repository.FuelLogRepository;
+import com.spectrum.spectrum_vms.repository.VehicleRepository;
+import com.spectrum.spectrum_vms.repository.VehicleRequestRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +30,15 @@ class VehicleRequestControllerTest {
     private MockMvc mockMvc;
 
 
+    @Autowired
+    private VehicleRequestRepository vehicleRequestRepository;
+    @Autowired
+    private VehicleRepository vehicleRepository;
+    @Autowired
+    private FuelLogRepository fuelLogRepository;
+    @Autowired
+    private DriverRepository driverRepository;
+
 
     @Before
     void setUp() throws Exception {
@@ -29,55 +46,10 @@ class VehicleRequestControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                \t"firstName":"Mahmudul",
-                                \t"lastName":"Rohim",
-                                \t"email":"mahml@gmail.com",
-                                \t"password":"123"
-                                }"""))
-                .andExpect(status().isOk());
-
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/vehicle/save")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("""
-                        {
-                        \t"make": "Toyota",
-                        \t"model": "Toyota Mas",
-                        \t"year": 2020,
-                        \t"regNumber": "1520145",
-                        \t"engineNumber": "something",
-                        \t"vinNumber": "something"
-                        }"""))
-                .andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.post("/vehicle/save")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                \t"make": "Toyota",
-                                \t"model": "Toyota Mas",
-                                \t"year": 2020,
-                                \t"regNumber": "1520145",
-                                \t"engineNumber": "something",
-                                \t"vinNumber": "something"
-                                }"""))
-                .andExpect(status().isOk());
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/driver/save")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                \t"name":"Nobin",
-                                \t"contactNumber":"01704329668",
-                                \t"address":"Dhaka"
-                                }"""))
-                .andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.post("/driver/save")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                \t"name":"Nobin",
-                                \t"contactNumber":"01704329668",
-                                \t"address":"Dhaka"
+                                "firstName":"Mahmudul",
+                                "lastName":"Rohim",
+                                "email":"mahml@gmail.com",
+                                "password":"123"
                                 }"""))
                 .andExpect(status().isOk());
 
@@ -89,40 +61,6 @@ class VehicleRequestControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                \t"vehicles":[ {
-                                \t\t"id":1,
-                                \t\t"make": "Toyota",
-                                \t\t"model": "Toyota Mas",
-                                \t\t"year": 2020,
-                                \t\t"regNumber": "1520145",
-                                \t\t"engineNumber": "something",
-                                \t\t"vinNumber": "something"
-                                \t},
-                                \t{
-                                \t\t"id":2,
-                                \t\t"make": "Toyota",
-                                \t\t"model": "Toyota Mas",
-                                \t\t"year": 2020,
-                                \t\t"regNumber": "1520145",
-                                \t\t"engineNumber": "something",
-                                \t\t"vinNumber": "something"
-                                \t}
-                                \t\t\t\t\t\t\s
-                                \t\t\t\t\t\t ],
-                                \t"drivers": [
-                                \t{
-                                \t\t"id": 1,
-                                \t\t"name": "Mah",
-                                \t\t"contactNumber": "01704329668",
-                                \t\t"address": "Dhaka Bangladesh"
-                                \t},
-                                \t{
-                                \t\t"id": 2,
-                                \t\t"name": "Mah",
-                                \t\t"contactNumber": "01704329668",
-                                \t\t"address": "Dhaka Bangladesh"
-                                \t}
-                                ],
                                 \t"requestDate": null,
                                 \t"startDate": null,
                                 \t"endDate": null,
@@ -153,38 +91,6 @@ class VehicleRequestControllerTest {
                         .content("""
                                 {
                                 "id": 1,
-                                "vehicles":[{
-                                "id":1,
-                                "make": "Toyota",
-                                "model": "Toyota Mas",
-                                "year": 2020,
-                                "regNumber": "1520145",
-                                "engineNumber": "something",
-                                "vinNumber": "something"
-                                },
-                                {
-                                "id":2,
-                                "make": "Toyota",
-                                "model": "Toyota Mas",
-                                "year": 2020,
-                                "regNumber": "1520145",
-                                "engineNumber": "something",
-                                "vinNumber": "something"
-                                }],
-                                "drivers": [
-                                {
-                                "id": 1,
-                                "name": "Mah",
-                                "contactNumber": "01704329668",
-                                "address": "Dhaka Bangladesh"
-                                },
-                                {
-                                "id": 2,
-                                "name": "Mah",
-                                "contactNumber": "01704329668",
-                                "address": "Dhaka Bangladesh"
-                                }
-                                ],
                                 "requestDate": null,
                                 "startDate": null,
                                 "endDate": null,
