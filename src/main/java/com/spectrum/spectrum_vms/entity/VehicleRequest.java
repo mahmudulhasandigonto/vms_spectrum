@@ -1,6 +1,7 @@
 package com.spectrum.spectrum_vms.entity;
 
 import com.spectrum.spectrum_vms.enums.RequestStatus;
+import com.spectrum.spectrum_vms.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -18,6 +19,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class VehicleRequest extends BaseEntity{
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToMany
     private List<Vehicle> vehicles;

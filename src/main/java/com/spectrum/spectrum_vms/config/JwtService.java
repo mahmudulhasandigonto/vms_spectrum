@@ -37,6 +37,7 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
+        extraClaims.put("auth", userDetails.getAuthorities());
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

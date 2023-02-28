@@ -37,7 +37,7 @@ public class UserController implements BaseController<User, Long>{
 
 
     //all information update purpose
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @Override
     public ResponseEntity<String> update(@RequestBody User user) throws Exception {
         try {
@@ -50,7 +50,7 @@ public class UserController implements BaseController<User, Long>{
 
 
     //single or multiple user information delete purpose
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public ResponseEntity<String> deleteByIds(@PathVariable("ids") Long... ids) throws DeleteRequestException {
         try {
