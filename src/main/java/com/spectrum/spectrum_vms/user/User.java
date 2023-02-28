@@ -1,6 +1,7 @@
 package com.spectrum.spectrum_vms.user;
 
 
+import com.spectrum.spectrum_vms.entity.BaseEntity;
 import com.spectrum.spectrum_vms.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,10 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "_user")
-public class User implements UserDetails {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class User extends BaseEntity implements UserDetails {
+
 
     @Column(name = "_firstname", nullable = false, length = 120)
     private String firstName;
@@ -35,7 +34,6 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "_password", nullable = false)
-
     private String password;
 
     @Enumerated(EnumType.STRING)
