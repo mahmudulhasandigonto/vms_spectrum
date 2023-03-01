@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 @Entity
@@ -19,11 +23,28 @@ public class Driver extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+
+    @Column(name = "driver_image")
+    private String driverImage;
+
     @Column(name = "contact_number", nullable = false, length = 12)
     private String contactNumber;
 
     @Column(name = "address", nullable = false)
     private String address;
+
+
+    @PreRemove
+    private void removeImage() {
+        if (driverImage != null) {
+            try {
+                Path imagePath = Paths.get("path/to/image/directory", driverImage);
+                Files.delete(imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

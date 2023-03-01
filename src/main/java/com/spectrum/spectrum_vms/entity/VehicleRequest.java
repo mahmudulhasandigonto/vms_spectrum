@@ -7,7 +7,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,20 +32,33 @@ public class VehicleRequest extends BaseEntity{
     private List<Driver> drivers;
 
 
-    @Column(name = "request_date")
-    private LocalDateTime requestDate;
+    @Column(name = "request_date", nullable = false)
+    private LocalDateTime requestDate= LocalDateTime.now();
 
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     private LocalDateTime startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
+    @Column(name = "departure")
+    private String departure;
+
+    @Column(name = "destination")
+    private String destination;
+
+
+   @Transient
+    private Integer duration;
+
+    public Integer getDuration() {
+        return duration;
+    }
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "request_status")
-    private RequestStatus requestStatus;
+    @Column(name = "request_status", nullable = false)
+    private RequestStatus requestStatus=RequestStatus.PENDING;
 
     @Override
     public boolean equals(Object o) {

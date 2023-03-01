@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -42,6 +46,19 @@ public class VehicleDocument extends BaseEntity {
     private String scanCopy;
 
     // getters and setters
+
+    @PreRemove
+    private void removeImage() {
+        if (scanCopy != null) {
+            try {
+                Path imagePath = Paths.get("path/to/image/directory", scanCopy);
+                Files.delete(imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {

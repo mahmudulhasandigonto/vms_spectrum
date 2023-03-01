@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +29,10 @@ public class Vehicle extends BaseEntity {
     @Column(name = "year", nullable = false)
     private Integer year;
 
+
+    @Column(name = "vehicle_image")
+    private String vehicleImage;
+
     @Column(name = "reg_number", nullable = false)
     private String regNumber;
 
@@ -33,6 +41,18 @@ public class Vehicle extends BaseEntity {
 
     @Column(name = "vin_number")
     private String vinNumber;
+
+    @PreRemove
+    private void removeImage() {
+        if (vehicleImage != null) {
+            try {
+                Path imagePath = Paths.get("path/to/image/directory", vehicleImage);
+                Files.delete(imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

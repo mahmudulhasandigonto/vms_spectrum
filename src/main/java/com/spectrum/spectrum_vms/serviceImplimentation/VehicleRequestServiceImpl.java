@@ -1,6 +1,7 @@
 package com.spectrum.spectrum_vms.serviceImplimentation;
 
 import com.spectrum.spectrum_vms.entity.VehicleRequest;
+import com.spectrum.spectrum_vms.repository.VehicleDocumentRepository;
 import com.spectrum.spectrum_vms.repository.VehicleRequestRepository;
 import com.spectrum.spectrum_vms.service.VehicleRequestService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleRequestServiceImpl implements VehicleRequestService {
     private final VehicleRequestRepository vehicleRequestRepository;
+    private final VehicleDocumentRepository vehicleDocumentRepository;
 
     @Override
     public VehicleRequest save(VehicleRequest vehicleRequest) {
@@ -44,4 +46,8 @@ public class VehicleRequestServiceImpl implements VehicleRequestService {
         return vehicleRequestRepository.findAll();
     }
 
+    @Override
+    public List<VehicleRequest> findByUserId(Long userId) {
+        return vehicleRequestRepository.findByUserId(userId);
+    }
 }

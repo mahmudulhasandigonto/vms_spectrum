@@ -7,10 +7,7 @@ import com.spectrum.spectrum_vms.service.DriverService;
 import com.spectrum.spectrum_vms.service.VehicleRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,6 +58,13 @@ public class VehicleRequestController implements BaseController<VehicleRequest, 
     @Override
     public ResponseEntity<List<VehicleRequest>> getDataByIds(@PathVariable("ids") Long... ids) {
         List<VehicleRequest> vehicleRequest = vehicleRequestService.getDataByIds(ids);
+        return ResponseEntity.ok(vehicleRequest);
+    }
+
+
+    @GetMapping("/user_id/{id}")
+    public ResponseEntity<List<VehicleRequest>> getDataByUserId(@PathVariable("id") Long id) {
+        List<VehicleRequest> vehicleRequest = vehicleRequestService.findByUserId(id);
         return ResponseEntity.ok(vehicleRequest);
     }
 
