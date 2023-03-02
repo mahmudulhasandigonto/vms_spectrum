@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -50,9 +51,12 @@ public class VehicleRequest extends BaseEntity{
 
 
    @Transient
-    private Integer duration;
+    private Duration duration;
 
-    public Integer getDuration() {
+    public Duration getDuration() {
+        if (duration == null) {
+            duration = Duration.between(startDate, endDate);
+        }
         return duration;
     }
 

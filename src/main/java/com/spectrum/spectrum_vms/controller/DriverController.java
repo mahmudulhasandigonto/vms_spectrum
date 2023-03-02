@@ -3,7 +3,6 @@ package com.spectrum.spectrum_vms.controller;
 
 import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.error.DeleteRequestException;
-import com.spectrum.spectrum_vms.error.DriverNotFoundException;
 import com.spectrum.spectrum_vms.repository.DriverRepository;
 import com.spectrum.spectrum_vms.service.DriverService;
 import lombok.RequiredArgsConstructor;
@@ -68,7 +67,7 @@ public class DriverController implements BaseController<Driver, Long> {
            return ResponseEntity.ok("ID " + Arrays.toString(ids) + " has been deleted successfully");
        }
        catch (Exception ex){
-           throw new DeleteRequestException("Error deleting driver with id " + ids);
+           throw new DeleteRequestException("Error deleting driver with id " + Arrays.toString(ids));
         }
 
     }
