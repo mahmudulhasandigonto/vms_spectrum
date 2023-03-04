@@ -35,6 +35,9 @@ class VehicleRequestRepositoryTest {
 
 
 
+
+
+
     @Test
     @DisplayName("Fetch all data")
     public void testFetchData(){
@@ -140,22 +143,15 @@ class VehicleRequestRepositoryTest {
 
 
 
-        List<VehicleRequest> expectedData = Arrays.asList(
-                VehicleRequest.builder()
+
+             VehicleRequest expectedData =  VehicleRequest.builder()
                         .vehicles(vcList)
                         .drivers(dvList)
                         .requestStatus(RequestStatus.ACCEPTED)
-                        .build(),
-                VehicleRequest.builder()
-                        .vehicles(vcList)
-                        .drivers(dvList)
-                        .requestStatus(RequestStatus.ACCEPTED)
-                        .build());
-        List<Long> list = new ArrayList<>();
-        list.add(1L);
-        list.add(2L);
-        when(vehicleRequestRepository.findAllById(list)).thenReturn(expectedData);
-        List<VehicleRequest> data = vehicleRequestServiceImpl.getDataByIds(new Long[]{1L,2L});
+                        .build();
+
+        when(vehicleRequestRepository.findById(1L).get()).thenReturn(expectedData);
+        VehicleRequest data = vehicleRequestServiceImpl.getDataById(1L);
         assertEquals(expectedData, data);
     }
 
@@ -206,9 +202,6 @@ class VehicleRequestRepositoryTest {
         List<Driver> dvList = new ArrayList<Driver>();
         dvList.add(driverOne);
         dvList.add(driverTwo);
-
-
-
 
         VehicleRequest vehicleRequest = VehicleRequest.builder()
                 .vehicles(vcList)

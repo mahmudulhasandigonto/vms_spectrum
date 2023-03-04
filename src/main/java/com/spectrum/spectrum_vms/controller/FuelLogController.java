@@ -50,10 +50,10 @@ public class FuelLogController implements BaseController<FuelLog, Long> {
         }
     }
 
-    //single or multiple information get purpose
+    //single information get purpose
     @Override
-    public ResponseEntity<List<FuelLog>> getDataByIds(@PathVariable("ids") Long... ids) {
-        List<FuelLog> fuelLongList = fuelLogService.getDataByIds(ids);
+    public ResponseEntity<FuelLog> getDataById(@PathVariable("id") Long id) {
+        FuelLog fuelLongList = fuelLogService.getDataById(id);
         return ResponseEntity.ok(fuelLongList);
     }
 

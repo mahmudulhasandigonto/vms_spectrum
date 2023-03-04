@@ -64,11 +64,11 @@ public class UserController implements BaseController<User, Long>{
     }
 
 
-    //single or multiple information get purpose
+    //single information get purpose
     @Override
-    public ResponseEntity<List<User>> getDataByIds(@PathVariable("ids") Long... ids) {
-        List<User> userList = userService.getDataByIds(ids);
-        return ResponseEntity.ok(userList);
+    public ResponseEntity<User> getDataById(@PathVariable("id") Long id) {
+        User user = userService.getDataById(id);
+        return ResponseEntity.ok(user);
     }
 
     //all information get purpose

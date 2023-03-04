@@ -62,10 +62,10 @@ public class VehicleDocumentController implements BaseController<VehicleDocument
         }
     }
 
-    //single or multiple information get purpose
+    //single information get purpose
     @Override
-    public ResponseEntity<List<VehicleDocument>> getDataByIds(@PathVariable("ids") Long... ids) {
-        List<VehicleDocument> vehicleList = vehicleDocumentService.getDataByIds(ids);
+    public ResponseEntity<VehicleDocument> getDataById(@PathVariable("id") Long id) {
+        VehicleDocument vehicleList = vehicleDocumentService.getDataById(id);
         return ResponseEntity.ok(vehicleList);
     }
 

@@ -1,6 +1,9 @@
 package com.spectrum.spectrum_vms.serviceImplimentation;
 
 import com.spectrum.spectrum_vms.entity.FuelLog;
+import com.spectrum.spectrum_vms.entity.Vehicle;
+import com.spectrum.spectrum_vms.error.FuelLogNotFoundException;
+import com.spectrum.spectrum_vms.error.VehicleRequestNotFoundException;
 import com.spectrum.spectrum_vms.repository.FuelLogRepository;
 import com.spectrum.spectrum_vms.service.FuelLogService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.awt.dnd.InvalidDnDOperationException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,8 +40,13 @@ public class FuelLogServiceImpl implements FuelLogService {
     }
 
     @Override
-    public List<FuelLog> getDataByIds(Long[] ids) {
-        return fuelLogRepository.findAllById(Arrays.asList(ids));
+    public FuelLog getDataById(Long id) {
+        Optional<FuelLog> fuelLog = fuelLogRepository.findById(id);
+        if(fuelLog.isEmpty()){
+            new FuelLogNotFoundException("FuelLog Not Found");
+        }
+        return fuelLog.get();
+
     }
 
     @Override

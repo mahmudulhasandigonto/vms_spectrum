@@ -1,5 +1,7 @@
 package com.spectrum.spectrum_vms.serviceImplimentation;
 
+import com.spectrum.spectrum_vms.entity.Vehicle;
+import com.spectrum.spectrum_vms.error.VehicleRequestNotFoundException;
 import com.spectrum.spectrum_vms.service.UserService;
 import com.spectrum.spectrum_vms.user.User;
 import com.spectrum.spectrum_vms.user.UserRepository;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.awt.dnd.InvalidDnDOperationException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,8 +49,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getDataByIds(Long[] ids) {
-        return userRepository.findAllById(Arrays.asList(ids));
+    public User getDataById(Long id) {
+        return userRepository.findById(id).get();
     }
 
     @Override

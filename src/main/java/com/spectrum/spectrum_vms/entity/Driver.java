@@ -24,10 +24,13 @@ public class Driver extends BaseEntity {
     private String name;
 
 
+    @Column(name = "age", nullable = false)
+    private Integer age;
+
     @Column(name = "driver_image")
     private String driverImage;
 
-    @Column(name = "contact_number", nullable = false, length = 12)
+    @Column(name = "contact_number", nullable = false, unique = true, length = 12)
     private String contactNumber;
 
     @Column(name = "address", nullable = false)

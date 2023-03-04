@@ -54,9 +54,9 @@ class FuelLogServiceTest {
     @DisplayName("Get data based on ids")
     public void getDataByIds() {
         double cost = 5.20;
-        Long[] ids = {1L, 2L};
-       List<FuelLog> found = fuelLogService.getDataByIds(ids);
-        assertEquals(cost, found.get(0).getCost());
+
+       FuelLog found = fuelLogService.getDataById(1L);
+        assertEquals(cost, found.getCost());
     }
 
 }

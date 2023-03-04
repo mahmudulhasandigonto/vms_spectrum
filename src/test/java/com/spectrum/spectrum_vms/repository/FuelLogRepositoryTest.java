@@ -71,24 +71,16 @@ class FuelLogRepositoryTest {
                 .model("Toyota hycy")
                 .year(2000)
                 .build();
-        List<FuelLog> expectedData = Arrays.asList(
-                FuelLog.builder()
+
+        FuelLog expectedData = FuelLog.builder()
                         .liters(20.0)
                         .fuelType(FuelType.DIESEL)
                         .cost(5000.0)
                         .vehicle(vehicle)
-                        .build(),
-                FuelLog.builder()
-                        .liters(20.0)
-                        .fuelType(FuelType.DIESEL)
-                        .cost(5000.0)
-                        .vehicle(vehicle)
-                        .build());
-        List<Long> list = new ArrayList<>();
-        list.add(1L);
-        list.add(2L);
-        when(fuelLogRepository.findAllById(list)).thenReturn(expectedData);
-        List<FuelLog> data = fuelLogServiceImpl.getDataByIds(new Long[]{1L,2L});
+                        .build();
+
+        when(fuelLogRepository.findById(1L).get()).thenReturn(expectedData);
+        FuelLog data = fuelLogServiceImpl.getDataById(1L);
         assertEquals(expectedData, data);
     }
 

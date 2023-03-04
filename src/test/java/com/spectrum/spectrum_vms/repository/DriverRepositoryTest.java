@@ -2,11 +2,13 @@ package com.spectrum.spectrum_vms.repository;
 
 import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.serviceImplimentation.DriverServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -28,6 +30,17 @@ class DriverRepositoryTest {
     private DriverServiceImpl driverService;
 
 
+
+
+    @BeforeEach
+    void setUp() {
+        Driver driver = Driver.builder()
+                .address("Rangur")
+                .name("Rohim")
+                .contactNumber("0170432966")
+                .build();
+        driverRepository.save(driver);
+    }
 
 
     @Test
@@ -56,22 +69,15 @@ class DriverRepositoryTest {
     @Test
     @DisplayName("Find Driver object by Ids")
     public void fetchDataByIds(){
-        List<Driver> expectedData = Arrays.asList(
-                Driver.builder()
-                        .name("Nobin")
-                        .contactNumber("01704329668")
-                        .address("Dhaka")
-                        .build(),
-                Driver.builder()
+
+              Driver expectedData = Driver.builder()
                         .name("Nobin")
                         .contactNumber("01704329668")
                         .address("Rangpur")
-                        .build());
-        List<Long> list = new ArrayList<>();
-        list.add(1L);
-        list.add(2L);
-        when(driverRepository.findAllById(list)).thenReturn(expectedData);
-        List<Driver> data = driverService.getDataByIds(new Long[]{1L,2L});
+                        .build();
+
+        when(driverRepository.findById(1L).get()).thenReturn(expectedData);
+        Driver data = driverService.getDataById(1L);
         assertEquals(expectedData, data);
     }
 

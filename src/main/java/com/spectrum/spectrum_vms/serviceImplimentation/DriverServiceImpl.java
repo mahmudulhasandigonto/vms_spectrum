@@ -1,6 +1,7 @@
 package com.spectrum.spectrum_vms.serviceImplimentation;
 
 import com.spectrum.spectrum_vms.entity.Driver;
+import com.spectrum.spectrum_vms.error.DriverNotFoundException;
 import com.spectrum.spectrum_vms.repository.DriverRepository;
 import com.spectrum.spectrum_vms.service.DriverService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.awt.dnd.InvalidDnDOperationException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,8 +38,12 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public List<Driver> getDataByIds(Long[] ids) {
-        return driverRepository.findAllById(Arrays.asList(ids));
+    public Driver getDataById(Long id) {
+        Optional<Driver> driver = driverRepository.findById(id);
+        if(driver.isEmpty()){
+            new DriverNotFoundException("Driver Not Found");
+        }
+        return driver.get();
     }
 
     @Override

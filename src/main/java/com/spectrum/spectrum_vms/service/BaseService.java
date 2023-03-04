@@ -10,7 +10,7 @@ public interface BaseService<Entity, ID> {
 
    void deleteByIds(ID[] ids);
 
-   List<Entity> getDataByIds(ID[] ids);
+   Entity getDataById(ID id);
 
    List<Entity> getData();
 }

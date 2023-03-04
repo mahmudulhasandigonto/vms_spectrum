@@ -61,11 +61,11 @@ public class VehicleController implements BaseController<Vehicle, Long> {
         }
     }
 
-    //single or multiple information get purpose
+    //single information get purpose
     @Override
-    public ResponseEntity<List<Vehicle>> getDataByIds(@PathVariable("ids") Long... ids) {
-        List<Vehicle> vehicleList = vehicleService.getDataByIds(ids);
-        return ResponseEntity.ok(vehicleList);
+    public ResponseEntity<Vehicle> getDataById(@PathVariable("id") Long id) {
+        Vehicle vehicle = vehicleService.getDataById(id);
+        return ResponseEntity.ok(vehicle);
     }
 
     // all information get purpose

@@ -21,8 +21,8 @@ public interface BaseController<Entity, ID> {
         @DeleteMapping(value = "delete/{ids}")
         ResponseEntity<?> deleteByIds(ID... ids) throws DeleteRequestException;
 
-        @GetMapping(value = "list/{ids}")
-        ResponseEntity<List<Entity>> getDataByIds(ID... ids);
+        @GetMapping(value = "{id}")
+        ResponseEntity<Entity> getDataById(ID id);
 
         @GetMapping(value = "list")
         List<Entity> getData();

@@ -2,6 +2,7 @@ package com.spectrum.spectrum_vms.controller;
 
 import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.entity.VehicleRequest;
+import com.spectrum.spectrum_vms.enums.RequestStatus;
 import com.spectrum.spectrum_vms.error.DeleteRequestException;
 import com.spectrum.spectrum_vms.service.DriverService;
 import com.spectrum.spectrum_vms.service.VehicleRequestService;
@@ -56,13 +57,13 @@ public class VehicleRequestController implements BaseController<VehicleRequest, 
 
     //single or multiple information delete purpose
     @Override
-    public ResponseEntity<List<VehicleRequest>> getDataByIds(@PathVariable("ids") Long... ids) {
-        List<VehicleRequest> vehicleRequest = vehicleRequestService.getDataByIds(ids);
+    public ResponseEntity<VehicleRequest> getDataById(@PathVariable("id") Long id) {
+        VehicleRequest vehicleRequest = vehicleRequestService.getDataById(id);
         return ResponseEntity.ok(vehicleRequest);
     }
 
 
-    @GetMapping("/user_id/{id}")
+    @GetMapping("user/{id}")
     public ResponseEntity<List<VehicleRequest>> getDataByUserId(@PathVariable("id") Long id) {
         List<VehicleRequest> vehicleRequest = vehicleRequestService.findByUserId(id);
         return ResponseEntity.ok(vehicleRequest);
@@ -72,5 +73,12 @@ public class VehicleRequestController implements BaseController<VehicleRequest, 
     @Override
     public List<VehicleRequest> getData() {
         return vehicleRequestService.getData();
+    }
+
+
+    @GetMapping("vehicle_request_status/{request_status}")
+    public ResponseEntity<List<VehicleRequest>> getDataByRequestStatus(@PathVariable("request_status") RequestStatus request_status){
+        List<VehicleRequest> vehicleRequests = vehicleRequestService.getDataByRequestStatus(request_status);
+        return ResponseEntity.ok(vehicleRequests);
     }
 }

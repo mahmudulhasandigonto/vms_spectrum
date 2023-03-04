@@ -1,5 +1,6 @@
 package com.spectrum.spectrum_vms.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spectrum.spectrum_vms.enums.RequestStatus;
 import com.spectrum.spectrum_vms.user.User;
 import jakarta.persistence.*;
@@ -25,21 +26,26 @@ public class VehicleRequest extends BaseEntity{
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Vehicle> vehicles;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Driver> drivers;
 
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss a")
     @Column(name = "request_date", nullable = false)
-    private LocalDateTime requestDate= LocalDateTime.now();
+    private LocalDateTime requestDate = LocalDateTime.now();
 
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss a")
     @Column(name = "start_date", nullable = false)
     private LocalDateTime startDate;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss a")
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
@@ -51,18 +57,20 @@ public class VehicleRequest extends BaseEntity{
 
 
    @Transient
-    private Duration duration;
+    private Long duration;
 
-    public Duration getDuration() {
-        if (duration == null) {
-            duration = Duration.between(startDate, endDate);
-        }
-        return duration;
-    }
 
     @Enumerated(EnumType.STRING)
     @Column(name = "request_status", nullable = false)
     private RequestStatus requestStatus=RequestStatus.PENDING;
+
+    public Long getDuration() {
+        if (duration == null) {
+            duration = Duration.between(endDate, startDate).getSeconds();
+        }
+        return duration;
+    }
+
 
     @Override
     public boolean equals(Object o) {

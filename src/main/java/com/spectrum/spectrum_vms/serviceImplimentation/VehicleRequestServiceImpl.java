@@ -1,6 +1,10 @@
 package com.spectrum.spectrum_vms.serviceImplimentation;
 
+import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.entity.VehicleRequest;
+import com.spectrum.spectrum_vms.enums.RequestStatus;
+import com.spectrum.spectrum_vms.error.DriverNotFoundException;
+import com.spectrum.spectrum_vms.error.VehicleRequestNotFoundException;
 import com.spectrum.spectrum_vms.repository.VehicleDocumentRepository;
 import com.spectrum.spectrum_vms.repository.VehicleRequestRepository;
 import com.spectrum.spectrum_vms.service.VehicleRequestService;
@@ -10,12 +14,12 @@ import org.springframework.stereotype.Service;
 import java.awt.dnd.InvalidDnDOperationException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class VehicleRequestServiceImpl implements VehicleRequestService {
     private final VehicleRequestRepository vehicleRequestRepository;
-    private final VehicleDocumentRepository vehicleDocumentRepository;
 
     @Override
     public VehicleRequest save(VehicleRequest vehicleRequest) {
@@ -37,8 +41,12 @@ public class VehicleRequestServiceImpl implements VehicleRequestService {
     }
 
     @Override
-    public List<VehicleRequest> getDataByIds(Long[] ids) {
-        return vehicleRequestRepository.findAllById(Arrays.asList(ids));
+    public VehicleRequest getDataById(Long id) {
+        Optional<VehicleRequest> vehicleRequest = vehicleRequestRepository.findById(id);
+        if(vehicleRequest.isEmpty()){
+            new VehicleRequestNotFoundException("VehicleRequest Not Found");
+        }
+        return vehicleRequest.get();
     }
 
     @Override
@@ -49,5 +57,10 @@ public class VehicleRequestServiceImpl implements VehicleRequestService {
     @Override
     public List<VehicleRequest> findByUserId(Long userId) {
         return vehicleRequestRepository.findByUserId(userId);
+    }
+
+    @Override
+    public List<VehicleRequest> getDataByRequestStatus(RequestStatus requestStatus) {
+        return vehicleRequestRepository.findByRequestStatus(requestStatus);
     }
 }

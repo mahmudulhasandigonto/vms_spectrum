@@ -73,11 +73,11 @@ public class DriverController implements BaseController<Driver, Long> {
     }
 
 
-    //single or multiple information get purpose
+    //single information get purpose
     @Override
-    public ResponseEntity<List<Driver>> getDataByIds(@PathVariable("ids") Long... ids) {
-        List<Driver> driverList = driverService.getDataByIds(ids);
-        return ResponseEntity.ok(driverList);
+    public ResponseEntity<Driver> getDataById(@PathVariable("id") Long id) {
+        Driver driver = driverService.getDataById(id);
+        return ResponseEntity.ok(driver);
     }
 
     //all information get purpose

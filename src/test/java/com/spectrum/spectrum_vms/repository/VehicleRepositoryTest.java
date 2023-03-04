@@ -32,6 +32,27 @@ class VehicleRepositoryTest {
 
 
 
+    @Test
+    @DisplayName("Save Data")
+    public void setUp(){
+      Vehicle vehicleOne=  Vehicle.builder()
+                .make("Toyota")
+                .engineNumber("ncwepe22")
+                .model("Toyota hycy")
+                .year(2000)
+                .build();
+        Vehicle vehicleTwo =  Vehicle.builder()
+                .make("Toyota")
+                .engineNumber("ncwepe22")
+                .model("Toyota hycy")
+                .year(2000)
+                .build();
+
+        vehicleRepository.save(vehicleOne);
+        vehicleRepository.save(vehicleTwo);
+
+    }
+
 
     @Test
     @DisplayName("Fetch all data")
@@ -60,26 +81,18 @@ class VehicleRepositoryTest {
 
 
     @Test
-    @DisplayName("Find Vehicle object by Ids")
-    public void fetchDataByIds(){
-        List<Vehicle> expectedData = Arrays.asList(
-                Vehicle.builder()
+    @DisplayName("Find Vehicle object by Id")
+    public void fetchDataById(){
+
+             Vehicle expectedData =  Vehicle.builder()
                         .make("Toyota")
                         .engineNumber("ncwepe22")
                         .model("Toyota hycy")
                         .year(2000)
-                        .build(),
-                Vehicle.builder()
-                        .make("Toyota")
-                        .engineNumber("ncwepe22")
-                        .model("Toyota hycy")
-                        .year(2000)
-                        .build());
-        List<Long> list = new ArrayList<>();
-        list.add(1L);
-        list.add(2L);
-        when(vehicleRepository.findAllById(list)).thenReturn(expectedData);
-        List<Vehicle> data = vehicleServiceImpl.getDataByIds(new Long[]{1L,2L});
+                        .build();
+
+        when(vehicleRepository.findById(1L).get()).thenReturn(expectedData);
+        Vehicle data = vehicleServiceImpl.getDataById(1L);
         assertEquals(expectedData, data);
     }
 
