@@ -39,11 +39,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver getDataById(Long id) {
-        Optional<Driver> driver = driverRepository.findById(id);
-        if(driver.isEmpty()){
-            new DriverNotFoundException("Driver Not Found");
-        }
-        return driver.get();
+        Driver driver = driverRepository.findById(id).get();
+        return driver;
     }
 
     @Override

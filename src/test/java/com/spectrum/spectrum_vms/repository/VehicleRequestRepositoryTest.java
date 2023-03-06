@@ -34,10 +34,6 @@ class VehicleRequestRepositoryTest {
 
 
 
-
-
-
-
     @Test
     @DisplayName("Fetch all data")
     public void testFetchData(){

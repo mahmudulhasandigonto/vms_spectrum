@@ -39,8 +39,12 @@ public class Vehicle extends BaseEntity {
     @Column(name = "engine_number")
     private String engineNumber;
 
+
     @Column(name = "vin_number")
     private String vinNumber;
+
+    private Boolean isAvailable=Boolean.TRUE;
+    private String problem;
 
     @PreRemove
     private void removeImage() {

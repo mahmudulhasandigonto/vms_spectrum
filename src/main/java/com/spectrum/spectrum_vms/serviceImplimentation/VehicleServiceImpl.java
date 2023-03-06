@@ -5,6 +5,7 @@ import com.spectrum.spectrum_vms.entity.VehicleRequest;
 import com.spectrum.spectrum_vms.error.VehicleNotFoundException;
 import com.spectrum.spectrum_vms.error.VehicleRequestNotFoundException;
 import com.spectrum.spectrum_vms.repository.VehicleRepository;
+import com.spectrum.spectrum_vms.repository.VehicleRequestRepository;
 import com.spectrum.spectrum_vms.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
+    private final VehicleRequestRepository vehicleRequestRepository;
 
     @Override
     public Vehicle save(Vehicle vehicle) {
@@ -41,12 +43,8 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Vehicle getDataById(Long id) {
-        Optional<Vehicle> vehicle = vehicleRepository.findById(id);
-        if(vehicle.isEmpty()){
-            new VehicleNotFoundException("Vehicle Not Found");
-        }
-        return vehicle.get();
-
+        Vehicle vehicle = vehicleRepository.findById(id).get();
+        return  vehicle;
     }
 
     @Override

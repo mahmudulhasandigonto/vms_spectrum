@@ -3,6 +3,7 @@ package com.spectrum.spectrum_vms.controller;
 import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.entity.Vehicle;
 import com.spectrum.spectrum_vms.error.DeleteRequestException;
+import com.spectrum.spectrum_vms.error.VehicleNotFoundException;
 import com.spectrum.spectrum_vms.repository.VehicleRepository;
 import com.spectrum.spectrum_vms.service.VehicleService;
 import lombok.RequiredArgsConstructor;
@@ -63,9 +64,13 @@ public class VehicleController implements BaseController<Vehicle, Long> {
 
     //single information get purpose
     @Override
-    public ResponseEntity<Vehicle> getDataById(@PathVariable("id") Long id) {
-        Vehicle vehicle = vehicleService.getDataById(id);
-        return ResponseEntity.ok(vehicle);
+    public ResponseEntity<Vehicle> getDataById(@PathVariable("id") Long id) throws VehicleNotFoundException {
+       try {
+           Vehicle vehicle = vehicleService.getDataById(id);
+           return ResponseEntity.ok(vehicle);
+       }catch (Exception exception){
+           throw new VehicleNotFoundException("Vehicle Not Found");
+       }
     }
 
     // all information get purpose

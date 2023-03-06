@@ -4,6 +4,7 @@ package com.spectrum.spectrum_vms.controller;
 import com.spectrum.spectrum_vms.entity.FuelLog;
 import com.spectrum.spectrum_vms.entity.Vehicle;
 import com.spectrum.spectrum_vms.error.DeleteRequestException;
+import com.spectrum.spectrum_vms.error.FuelLogNotFoundException;
 import com.spectrum.spectrum_vms.repository.FuelLogRepository;
 import com.spectrum.spectrum_vms.service.FuelLogService;
 import lombok.RequiredArgsConstructor;
@@ -52,9 +53,13 @@ public class FuelLogController implements BaseController<FuelLog, Long> {
 
     //single information get purpose
     @Override
-    public ResponseEntity<FuelLog> getDataById(@PathVariable("id") Long id) {
-        FuelLog fuelLongList = fuelLogService.getDataById(id);
-        return ResponseEntity.ok(fuelLongList);
+    public ResponseEntity<FuelLog> getDataById(@PathVariable("id") Long id) throws FuelLogNotFoundException {
+       try {
+           FuelLog fuelLongList = fuelLogService.getDataById(id);
+           return ResponseEntity.ok(fuelLongList);
+       }catch (Exception e){
+           throw new FuelLogNotFoundException("Fuel Log Not Found");
+       }
     }
 
     @Override

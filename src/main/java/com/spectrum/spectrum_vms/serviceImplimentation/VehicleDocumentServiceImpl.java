@@ -44,11 +44,9 @@ public class VehicleDocumentServiceImpl implements VehicleDocumentService {
 
     @Override
     public VehicleDocument getDataById(Long id) {
-        Optional<VehicleDocument> vehicleDocument = vehicleDocumentRepository.findById(id);
-        if(vehicleDocument.isEmpty()){
-            new VehicleDocumentNotFoundException("Vehicle Document Not Found");
-        }
-        return vehicleDocument.get();
+        VehicleDocument vehicleDocument = vehicleDocumentRepository.findById(id).get();
+        return vehicleDocument;
+
     }
 
     @Override

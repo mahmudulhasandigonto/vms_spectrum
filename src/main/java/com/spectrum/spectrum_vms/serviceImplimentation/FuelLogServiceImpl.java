@@ -41,12 +41,8 @@ public class FuelLogServiceImpl implements FuelLogService {
 
     @Override
     public FuelLog getDataById(Long id) {
-        Optional<FuelLog> fuelLog = fuelLogRepository.findById(id);
-        if(fuelLog.isEmpty()){
-            new FuelLogNotFoundException("FuelLog Not Found");
-        }
-        return fuelLog.get();
-
+        FuelLog fuelLog = fuelLogRepository.findById(id).get();
+        return fuelLog;
     }
 
     @Override

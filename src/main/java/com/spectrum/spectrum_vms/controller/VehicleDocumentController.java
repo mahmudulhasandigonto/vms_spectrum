@@ -3,6 +3,7 @@ package com.spectrum.spectrum_vms.controller;
 import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.entity.VehicleDocument;
 import com.spectrum.spectrum_vms.error.DeleteRequestException;
+import com.spectrum.spectrum_vms.error.VehicleNotFoundException;
 import com.spectrum.spectrum_vms.repository.VehicleDocumentRepository;
 import com.spectrum.spectrum_vms.service.VehicleDocumentService;
 import lombok.RequiredArgsConstructor;
@@ -64,9 +65,13 @@ public class VehicleDocumentController implements BaseController<VehicleDocument
 
     //single information get purpose
     @Override
-    public ResponseEntity<VehicleDocument> getDataById(@PathVariable("id") Long id) {
-        VehicleDocument vehicleList = vehicleDocumentService.getDataById(id);
-        return ResponseEntity.ok(vehicleList);
+    public ResponseEntity<VehicleDocument> getDataById(@PathVariable("id") Long id) throws VehicleNotFoundException {
+        try {
+            VehicleDocument vehicleList = vehicleDocumentService.getDataById(id);
+            return ResponseEntity.ok(vehicleList);
+        }catch (Exception e){
+            throw new VehicleNotFoundException("Vehicle Document Not Found");
+        }
     }
 
     // all information get purpose

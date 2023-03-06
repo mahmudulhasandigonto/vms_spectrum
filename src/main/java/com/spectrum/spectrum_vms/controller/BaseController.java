@@ -1,7 +1,7 @@
 package com.spectrum.spectrum_vms.controller;
 
 
-import com.spectrum.spectrum_vms.error.DeleteRequestException;
+import com.spectrum.spectrum_vms.error.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +22,7 @@ public interface BaseController<Entity, ID> {
         ResponseEntity<?> deleteByIds(ID... ids) throws DeleteRequestException;
 
         @GetMapping(value = "{id}")
-        ResponseEntity<Entity> getDataById(ID id);
+        ResponseEntity<Entity> getDataById(ID id) throws VehicleRequestNotFoundException, DriverNotFoundException, VehicleNotFoundException, FuelLogNotFoundException;
 
         @GetMapping(value = "list")
         List<Entity> getData();

@@ -36,6 +36,15 @@ public class Driver extends BaseEntity {
     @Column(name = "address", nullable = false)
     private String address;
 
+    private String licenseNumber;
+
+    private Boolean isAvailable=Boolean.TRUE;
+
+    private String problem;
+
+
+
+
 
     @PreRemove
     private void removeImage() {

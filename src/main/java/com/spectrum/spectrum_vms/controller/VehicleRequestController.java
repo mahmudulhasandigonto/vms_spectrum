@@ -4,6 +4,7 @@ import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.entity.VehicleRequest;
 import com.spectrum.spectrum_vms.enums.RequestStatus;
 import com.spectrum.spectrum_vms.error.DeleteRequestException;
+import com.spectrum.spectrum_vms.error.VehicleRequestNotFoundException;
 import com.spectrum.spectrum_vms.service.DriverService;
 import com.spectrum.spectrum_vms.service.VehicleRequestService;
 import lombok.RequiredArgsConstructor;
@@ -57,9 +58,14 @@ public class VehicleRequestController implements BaseController<VehicleRequest, 
 
     //single or multiple information delete purpose
     @Override
-    public ResponseEntity<VehicleRequest> getDataById(@PathVariable("id") Long id) {
-        VehicleRequest vehicleRequest = vehicleRequestService.getDataById(id);
-        return ResponseEntity.ok(vehicleRequest);
+    public ResponseEntity<VehicleRequest> getDataById(@PathVariable("id") Long id) throws VehicleRequestNotFoundException {
+        try {
+            VehicleRequest vehicleRequest = vehicleRequestService.getDataById(id);
+            return ResponseEntity.ok(vehicleRequest);
+        }
+        catch (Exception e){
+            throw new VehicleRequestNotFoundException("Vehicle Request is not found");
+        }
     }
 
 

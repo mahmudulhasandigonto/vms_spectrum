@@ -3,6 +3,7 @@ package com.spectrum.spectrum_vms.controller;
 
 import com.spectrum.spectrum_vms.entity.Driver;
 import com.spectrum.spectrum_vms.error.DeleteRequestException;
+import com.spectrum.spectrum_vms.error.DriverNotFoundException;
 import com.spectrum.spectrum_vms.repository.DriverRepository;
 import com.spectrum.spectrum_vms.service.DriverService;
 import lombok.RequiredArgsConstructor;
@@ -75,9 +76,15 @@ public class DriverController implements BaseController<Driver, Long> {
 
     //single information get purpose
     @Override
-    public ResponseEntity<Driver> getDataById(@PathVariable("id") Long id) {
-        Driver driver = driverService.getDataById(id);
-        return ResponseEntity.ok(driver);
+    public ResponseEntity<Driver> getDataById(@PathVariable("id") Long id) throws DriverNotFoundException {
+
+        try {
+            Driver driver = driverService.getDataById(id);
+            return ResponseEntity.ok(driver);
+        }catch (Exception exception){
+            throw new DriverNotFoundException("Driver Not Found");
+        }
+
     }
 
     //all information get purpose

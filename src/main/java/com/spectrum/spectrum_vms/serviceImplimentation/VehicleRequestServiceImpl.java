@@ -42,11 +42,8 @@ public class VehicleRequestServiceImpl implements VehicleRequestService {
 
     @Override
     public VehicleRequest getDataById(Long id) {
-        Optional<VehicleRequest> vehicleRequest = vehicleRequestRepository.findById(id);
-        if(vehicleRequest.isEmpty()){
-            new VehicleRequestNotFoundException("VehicleRequest Not Found");
-        }
-        return vehicleRequest.get();
+        VehicleRequest vehicleRequest = vehicleRequestRepository.findById(id).get();
+        return  vehicleRequest;
     }
 
     @Override
