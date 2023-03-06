@@ -1,11 +1,7 @@
 package com.spectrum.spectrum_vms.serviceImplimentation;
 
 import com.spectrum.spectrum_vms.entity.Vehicle;
-import com.spectrum.spectrum_vms.entity.VehicleRequest;
-import com.spectrum.spectrum_vms.error.VehicleNotFoundException;
-import com.spectrum.spectrum_vms.error.VehicleRequestNotFoundException;
 import com.spectrum.spectrum_vms.repository.VehicleRepository;
-import com.spectrum.spectrum_vms.repository.VehicleRequestRepository;
 import com.spectrum.spectrum_vms.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,14 +9,12 @@ import org.springframework.stereotype.Service;
 import java.awt.dnd.InvalidDnDOperationException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
-    private final VehicleRequestRepository vehicleRequestRepository;
 
     @Override
     public Vehicle save(Vehicle vehicle) {
@@ -50,6 +44,17 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<Vehicle> getData() {
         return vehicleRepository.findAll();
+    }
+
+
+    @Override
+    public List<Vehicle> findByIsAvailable(boolean isAvailable) {
+        return vehicleRepository.findByIsAvailable(isAvailable);
+    }
+
+    @Override
+    public List<Vehicle> findByProblemIsNotNull() {
+        return vehicleRepository.findByProblemIsNotNull();
     }
 
 }

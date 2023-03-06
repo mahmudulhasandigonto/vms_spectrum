@@ -26,13 +26,11 @@ public class VehicleRequest extends BaseEntity{
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Vehicle> vehicles;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Driver> drivers;
 
 

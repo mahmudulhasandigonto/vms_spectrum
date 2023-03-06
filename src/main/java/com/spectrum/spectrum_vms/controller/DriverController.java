@@ -94,6 +94,21 @@ public class DriverController implements BaseController<Driver, Long> {
     }
 
 
+
+
+    @GetMapping("available/{isAvailable}")
+    public List<Driver> getDataByAvailability(@PathVariable("isAvailable") Boolean isAvailable){
+        return driverService.findByIsAvailable(isAvailable);
+    }
+
+
+    @GetMapping("problem")
+    public List<Driver> getDataBasedOnProblem(){
+        return driverService.findByProblemIsNotNull();
+    }
+
+
+
     //for saving image
     @PostMapping("/{id}/image")
     public ResponseEntity<Void> saveImage(@PathVariable("id") Long driverId, @RequestParam("file") MultipartFile file) {
@@ -139,5 +154,7 @@ public class DriverController implements BaseController<Driver, Long> {
         headers.setContentLength(imageBytes.length);
         return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
     }
+
+
 
 }

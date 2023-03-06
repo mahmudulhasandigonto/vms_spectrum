@@ -33,7 +33,6 @@ class VehicleRequestRepositoryTest {
     private VehicleRequestServiceImpl vehicleRequestServiceImpl;
 
 
-
     @Test
     @DisplayName("Fetch all data")
     public void testFetchData(){
