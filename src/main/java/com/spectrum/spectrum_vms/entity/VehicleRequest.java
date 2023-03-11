@@ -27,10 +27,16 @@ public class VehicleRequest extends BaseEntity{
     private User user;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "vehicle_request_vehicles",
+            joinColumns = @JoinColumn(name = "vehicle_request_id"),
+            inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
     private List<Vehicle> vehicles;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "vehicle_request_drivers",
+            joinColumns = @JoinColumn(name = "vehicle_request_id"),
+            inverseJoinColumns = @JoinColumn(name = "driver_id"))
     private List<Driver> drivers;
 
 
@@ -53,7 +59,7 @@ public class VehicleRequest extends BaseEntity{
     @Column(name = "destination")
     private String destination;
 
-
+    private String remark;
    @Transient
     private Long duration;
 
