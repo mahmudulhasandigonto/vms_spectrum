@@ -70,7 +70,7 @@ public class VehicleRequest extends BaseEntity{
 
     public Long getDuration() {
         if (duration == null) {
-            duration = Duration.between(endDate, startDate).getSeconds();
+            duration = Duration.between(startDate, endDate).getSeconds();
         }
         return duration;
     }
