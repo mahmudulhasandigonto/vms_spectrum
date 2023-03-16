@@ -38,7 +38,11 @@ public class Driver extends BaseEntity {
 
     private String licenseNumber;
 
+    private String nid;
+
     private Boolean isAvailable=Boolean.TRUE;
+
+
 
     private String problem;
 
