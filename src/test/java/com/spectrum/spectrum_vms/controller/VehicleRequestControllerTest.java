@@ -1,13 +1,9 @@
 package com.spectrum.spectrum_vms.controller;
 
-import com.spectrum.spectrum_vms.entity.Driver;
-import com.spectrum.spectrum_vms.entity.FuelLog;
-import com.spectrum.spectrum_vms.entity.Vehicle;
-import com.spectrum.spectrum_vms.enums.FuelType;
 import com.spectrum.spectrum_vms.repository.DriverRepository;
 import com.spectrum.spectrum_vms.repository.FuelLogRepository;
 import com.spectrum.spectrum_vms.repository.VehicleRepository;
-import com.spectrum.spectrum_vms.repository.VehicleRequestRepository;
+import com.spectrum.spectrum_vms.repository.VehicleRequisitionRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +27,7 @@ class VehicleRequestControllerTest {
 
 
     @Autowired
-    private VehicleRequestRepository vehicleRequestRepository;
+    private VehicleRequisitionRepository vehicleRequestRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
     @Autowired

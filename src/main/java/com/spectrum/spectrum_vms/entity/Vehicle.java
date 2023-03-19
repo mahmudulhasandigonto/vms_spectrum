@@ -26,7 +26,7 @@ public class Vehicle extends BaseEntity {
     @Column(name = "model", nullable = false)
     private String model;
 
-    @Column(name = "year", nullable = false)
+    @Column(name = "model_year", nullable = false)
     private Integer year;
 
 
@@ -43,7 +43,10 @@ public class Vehicle extends BaseEntity {
     @Column(name = "vin_number")
     private String vinNumber;
 
+    @Column(name = "is_available")
     private Boolean isAvailable=Boolean.TRUE;
+
+    @Column(name = "problem")
     private String problem;
 
     @PreRemove

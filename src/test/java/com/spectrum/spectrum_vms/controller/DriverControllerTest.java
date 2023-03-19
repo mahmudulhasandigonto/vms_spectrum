@@ -1,6 +1,7 @@
 package com.spectrum.spectrum_vms.controller;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +22,7 @@ class DriverControllerTest {
 
 
 
-    @Before
+    @BeforeEach
     void setUp() throws Exception {
      mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)

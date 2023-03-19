@@ -1,123 +1,62 @@
 package com.spectrum.spectrum_vms.repository;
 
-import com.spectrum.spectrum_vms.entity.FuelLog;
 import com.spectrum.spectrum_vms.entity.Vehicle;
-import com.spectrum.spectrum_vms.enums.FuelType;
-import com.spectrum.spectrum_vms.serviceImplimentation.FuelLogServiceImpl;
-import com.spectrum.spectrum_vms.serviceImplimentation.VehicleServiceImpl;
-import org.junit.jupiter.api.DisplayName;
+import com.spectrum.spectrum_vms.user.UserRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-@ExtendWith(MockitoExtension.class)
+@DataJpaTest
 class VehicleRepositoryTest {
 
-    @Mock
+    @Autowired
     private VehicleRepository vehicleRepository;
-
-    @InjectMocks
-    private VehicleServiceImpl vehicleServiceImpl;
-
+    @Autowired
+    private UserRepository userRepository;
 
 
-    @Test
-    @DisplayName("Save Data")
+    @BeforeEach
     public void setUp(){
-      Vehicle vehicleOne=  Vehicle.builder()
-                .make("Toyota")
-                .engineNumber("ncwepe22")
-                .model("Toyota hycy")
-                .year(2000)
-                .build();
-        Vehicle vehicleTwo =  Vehicle.builder()
-                .make("Toyota")
-                .engineNumber("ncwepe22")
-                .model("Toyota hycy")
-                .year(2000)
-                .build();
+      Vehicle vehicleOne =  Vehicle.builder()
+              .make("Toyota")
+              .engineNumber("ncwepe22")
+              .model("Toyota hycy")
+              .year(1200)
+              .isAvailable(Boolean.FALSE)
+              .regNumber("504w25e")
+              .problem("Car has a problem")
+              .vinNumber("152w2eee")
+              .build();
 
         vehicleRepository.save(vehicleOne);
-        vehicleRepository.save(vehicleTwo);
 
     }
 
 
-    @Test
-    @DisplayName("Fetch all data")
-    public void testFetchData(){
 
-        List<Vehicle> expectedData = Arrays.asList(
-                Vehicle.builder()
-                        .make("Toyota")
-                        .engineNumber("ncwepe22")
-                        .model("Toyota hycy")
-                        .year(2000)
-                        .build(),
-                Vehicle.builder()
-                        .make("Toyota")
-                        .engineNumber("ncwepe22")
-                        .model("Toyota hycy")
-                        .year(2000)
-                        .build()
-
-        );
-        when(vehicleRepository.findAll()).thenReturn(expectedData);
-        List<Vehicle> actualData = vehicleServiceImpl.getData();
-        assertEquals(expectedData, actualData);
-    }
-
-
-
-    @Test
-    @DisplayName("Find Vehicle object by Id")
-    public void fetchDataById(){
-
-             Vehicle expectedData =  Vehicle.builder()
-                        .make("Toyota")
-                        .engineNumber("ncwepe22")
-                        .model("Toyota hycy")
-                        .year(2000)
-                        .build();
-
-        when(vehicleRepository.findById(1L).get()).thenReturn(expectedData);
-        Vehicle data = vehicleServiceImpl.getDataById(1L);
-        assertEquals(expectedData, data);
-    }
-
-
-    @Test
-    @DisplayName("Delete Vehicle object by Ids")
-    public void deleteDataByIds(){
-        Long[] ids = new Long[]{1L};
-        vehicleServiceImpl.deleteByIds(ids);
-        verify(vehicleRepository).deleteAllById(List.of(ids));
-
+    @AfterEach
+    void tearDown() {
+        vehicleRepository.deleteAll();
     }
 
     @Test
-    @DisplayName("Update Vehicle Object")
-    public void testUpdateData() throws Exception {
-        Vehicle vehicle = Vehicle.builder()
-                .make("Toyota")
-                .engineNumber("ncwepe22")
-                .model("Toyota hycy")
-                .year(2000)
-                .build();
-        vehicle.setId(1L);
-        vehicleServiceImpl.update(vehicle);
-        verify(vehicleRepository).save(vehicle);
+    void findByIsAvailable() {
+      List<Vehicle> expected =  vehicleRepository.findByIsAvailable(true);
+
+      assertThat(expected.isEmpty()).isTrue();
     }
 
+    @Test
+    void findByProblemIsNotNull() {
+        List<Vehicle> expected = vehicleRepository.findByProblemIsNotNull();
+
+        assertThat(expected.isEmpty()).isFalse();
+    }
 }

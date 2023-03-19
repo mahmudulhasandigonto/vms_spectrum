@@ -19,7 +19,7 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class VehicleRequest extends BaseEntity{
+public class VehicleRequisition extends BaseEntity{
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -80,7 +80,7 @@ public class VehicleRequest extends BaseEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        VehicleRequest that = (VehicleRequest) o;
+        VehicleRequisition that = (VehicleRequisition) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 

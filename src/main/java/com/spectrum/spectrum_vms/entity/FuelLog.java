@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -36,7 +40,23 @@ public class FuelLog extends BaseEntity {
     @Column(name = "refueling", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime refueling;
 
+
+    private String receiptImage;
+
     // Getters and Setters
+
+
+    @PreRemove
+    private void removeImage() {
+        if (receiptImage != null) {
+            try {
+                Path imagePath = Paths.get("path/to/image/directory", receiptImage);
+                Files.delete(imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

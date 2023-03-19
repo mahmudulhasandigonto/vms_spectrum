@@ -9,9 +9,9 @@ import java.util.List;
 @Service
 public interface DriverService extends BaseService<Driver, Long> {
 
-   public Driver findByDriverNameIgnoreCase(String driverName);
-
-   List<Driver> findByIsAvailable(boolean isAvailable);
+   List<Driver> findByIsAvailable(Boolean isTrue);
 
    List<Driver> findByProblemIsNotNull();
+
+    Driver findByContactNumber(String contactNumber);
 }

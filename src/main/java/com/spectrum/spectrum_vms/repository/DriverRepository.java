@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface DriverRepository  extends JpaRepository<Driver, Long> {
-    Driver findByNameIgnoreCase(String driverName);
+    Driver findByContactNumber(String contactNumber);
 
-    List<Driver> findByIsAvailable(boolean isAvailable);
+    List<Driver> findByIsAvailable(Boolean isTrue);
 
     @Query("select d from Driver d where d.problem is not null")
     List<Driver> findByProblemIsNotNull();

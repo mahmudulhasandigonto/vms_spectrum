@@ -96,15 +96,21 @@ public class DriverController implements BaseController<Driver, Long> {
 
 
 
-    @GetMapping("available/{isAvailable}")
-    public List<Driver> getDataByAvailability(@PathVariable("isAvailable") Boolean isAvailable){
-        return driverService.findByIsAvailable(isAvailable);
+    @GetMapping("available")
+    public List<Driver> getDataByAvailability(Boolean isTrue){
+        return driverService.findByIsAvailable(isTrue);
     }
 
 
     @GetMapping("problem")
     public List<Driver> getDataBasedOnProblem(){
         return driverService.findByProblemIsNotNull();
+    }
+
+
+    @GetMapping("contact_number/{contactNumber}")
+    public Driver getDataByContactNumber(@PathVariable("contactNumber") String contactNumber){
+        return driverService.findByContactNumber(contactNumber);
     }
 
 

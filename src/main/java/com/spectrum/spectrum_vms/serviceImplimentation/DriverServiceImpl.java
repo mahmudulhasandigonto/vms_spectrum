@@ -48,18 +48,19 @@ public class DriverServiceImpl implements DriverService {
         return driverRepository.findAll();
     }
 
-    @Override
-    public Driver findByDriverNameIgnoreCase(String driverName) {
-       return driverRepository.findByNameIgnoreCase(driverName);
-    }
 
     @Override
-    public List<Driver> findByIsAvailable(boolean isAvailable) {
-        return driverRepository.findByIsAvailable(isAvailable);
+    public List<Driver> findByIsAvailable(Boolean isTrue) {
+        return driverRepository.findByIsAvailable(isTrue);
     }
 
     @Override
     public List<Driver> findByProblemIsNotNull() {
         return driverRepository.findByProblemIsNotNull();
+    }
+
+    @Override
+    public Driver findByContactNumber(String contactNumber) {
+        return driverRepository.findByContactNumber(contactNumber);
     }
 }

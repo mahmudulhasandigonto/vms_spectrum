@@ -22,23 +22,23 @@ class DriverServiceTest {
 
     @BeforeEach
     void setUp() {
-
+        String contactNumber = "01704329668";
         Driver driver = Driver.builder()
                 .address("Rangur")
                 .name("Rohim")
-                .contactNumber("0170432966")
+                .contactNumber(contactNumber)
                 .build();
-        Mockito.when(driverRepository.findByNameIgnoreCase("Rohim"))
+        Mockito.when(driverRepository.findByContactNumber(contactNumber))
                 .thenReturn(driver);
 
     }
 
     @Test
-    @DisplayName("Get data based on valid driver name")
-    public void whenValidDriverName_thenDriverShouldFound() {
-        String driverName = "Rohim";
-        Driver found = driverService.findByDriverNameIgnoreCase(driverName);
-        assertEquals(driverName, found.getName());
+    @DisplayName("Get data based on valid driver contact number")
+    public void whenValidContactNumberNumber_thenDriverShouldFound() {
+        String contactNumber = "01704329668";
+        Driver found = driverService.findByContactNumber(contactNumber);
+        assertEquals(contactNumber, found.getContactNumber());
     }
 
 }
