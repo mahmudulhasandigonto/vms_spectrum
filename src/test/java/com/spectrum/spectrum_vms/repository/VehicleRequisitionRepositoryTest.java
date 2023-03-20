@@ -48,14 +48,14 @@ class VehicleRequisitionRepositoryTest {
 
         Vehicle vcOne = Vehicle.builder()
                 .make("Toyota")
-                .year(2020)
+                .modelYear(2020)
                 .engineNumber("125wiws125")
                 .regNumber("reksiw125")
                 .vinNumber("wi152")
                 .build();
         Vehicle vcTwo = Vehicle.builder()
                 .make("Toyota")
-                .year(2020)
+                .modelYear(2020)
                 .engineNumber("125wiws125")
                 .regNumber("reksiw125")
                 .vinNumber("wi152")

@@ -27,7 +27,7 @@ public class Vehicle extends BaseEntity {
     private String model;
 
     @Column(name = "model_year", nullable = false)
-    private Integer year;
+    private Integer modelYear;
 
 
     @Column(name = "vehicle_image")

@@ -65,7 +65,7 @@ public class VehicleRequisition extends BaseEntity{
 
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "request_status", nullable = false)
+    @Column(name = "request_status")
     private RequestStatus requestStatus=RequestStatus.PENDING;
 
     public Long getDuration() {

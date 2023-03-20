@@ -28,7 +28,7 @@ class VehicleRepositoryTest {
               .make("Toyota")
               .engineNumber("ncwepe22")
               .model("Toyota hycy")
-              .year(1200)
+              .modelYear(1200)
               .isAvailable(Boolean.FALSE)
               .regNumber("504w25e")
               .problem("Car has a problem")
