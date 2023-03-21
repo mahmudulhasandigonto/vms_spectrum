@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.awt.dnd.InvalidDnDOperationException;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -62,5 +63,10 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver findByContactNumber(String contactNumber) {
         return driverRepository.findByContactNumber(contactNumber);
+    }
+
+    @Override
+    public List<Driver> findByIsAvailableAndAvailableDateAfter(Boolean isAvailable, LocalDateTime localDateTime) {
+        return  driverRepository.findByIsAvailableAndAvailableDateAfter(isAvailable, localDateTime);
     }
 }

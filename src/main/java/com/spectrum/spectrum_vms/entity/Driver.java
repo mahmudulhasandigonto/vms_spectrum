@@ -1,5 +1,6 @@
 package com.spectrum.spectrum_vms.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -49,7 +51,9 @@ public class Driver extends BaseEntity {
     private double currentLat;
     private double currentLong;
 
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss a")
+    @Column(name = "availableDate")
+    private LocalDateTime availableDate;
 
 
 

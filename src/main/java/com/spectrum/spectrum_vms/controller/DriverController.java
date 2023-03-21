@@ -23,6 +23,7 @@ import java.nio.file.Path;
 
 
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -111,6 +112,12 @@ public class DriverController implements BaseController<Driver, Long> {
     @GetMapping("contact_number/{contactNumber}")
     public Driver getDataByContactNumber(@PathVariable("contactNumber") String contactNumber){
         return driverService.findByContactNumber(contactNumber);
+    }
+
+
+    @GetMapping("available_for_requisition/{isAvailable}/{localDateTime}")
+    public List<Driver> getDataByAvailabilityForRequisition(@PathVariable("isAvailable") Boolean isAvailable, @PathVariable("localDateTime") LocalDateTime localDateTime ){
+        return driverService.findByIsAvailableAndAvailableDateAfter(isAvailable, localDateTime);
     }
 
 
