@@ -46,6 +46,9 @@ public class Driver extends BaseEntity {
 
     private String problem;
 
+    private double currentLat;
+    private double currentLong;
+
 
 
 
